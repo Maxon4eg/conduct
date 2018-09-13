@@ -1,7 +1,6 @@
 package com.conductor;
 
 import com.conductor.model.Record;
-import com.conductor.util.PropertyLoader;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,6 +13,7 @@ import java.util.Map;
 public class AppTest {
     private final Record validRecord = new Record().withOutputValue("76277889E9341AE898EAE48F7664C59FBC0BECEE7527C50809873AC3A43E1873504275DDDB74557DD69774A4E917AC958296A9327D211B34CB3E716CD9169ACD");
     private final String validPrintableResult = "0,4\n 1,7\n 2,6\n 3,8\n 4,9\n 5,8\n 6,7\n 7,16\n 8,9\n 9,12\n A,8\n B,5\n C,9\n D,8\n E,10\n F,2\n";
+    private final String beacondURL = "https://beacon.nist.gov/rest/record/last";
     private final Map<String, Integer> testResult = new HashMap<String, Integer>() {
         {
             put("0", 4);
@@ -40,7 +40,7 @@ public class AppTest {
     @Test
 
     public void testGetRecord() throws Exception {
-        Record record = Worker.getLatestRecord(PropertyLoader.getBeaconURL());
+        Record record = Worker.getLatestRecord(beacondURL);
         Assert.assertNotNull(record.getOutputValue(), "output value is null");
         Assert.assertFalse(record.getOutputValue().isEmpty(), "output value is empty");
     }

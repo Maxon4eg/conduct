@@ -1,8 +1,8 @@
 package com.conductor;
 
 import com.conductor.model.Record;
+import com.conductor.util.Config;
 import com.conductor.util.CustomXmlMapper;
-import com.conductor.util.PropertyLoader;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,12 +22,12 @@ public class Worker {
     }
 
     public static void validateOutputValue(Record record) {
-        if (record.getOutputValue().length() != PropertyLoader.getOutputValueLength()) {
+        if (record.getOutputValue().length() != Config.getOutputValueLength()) {
             throw new UnsupportedOperationException("Output value is not valid  actual - " +
                     record.getOutputValue().length()
-                    + " expecting  - " + PropertyLoader.getOutputValueLength() + " ");
+                    + " expecting  - " + Config.getOutputValueLength() + " ");
         }
-        Matcher m = Pattern.compile(PropertyLoader.getHexAllowedChars()).matcher(record.getOutputValue());
+        Matcher m = Pattern.compile(Config.getHexAllowedChars()).matcher(record.getOutputValue());
         if (m.find()) {
             throw new UnsupportedOperationException("Not allowed character: " + m.group() +
                     " in outputValue : "
