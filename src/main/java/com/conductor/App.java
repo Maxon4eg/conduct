@@ -8,11 +8,12 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
-        Worker worker = new Worker();
-        Record record = worker.getLatestRecord(PropertyLoader.getBeaconURL());
-        worker.validateOutputValue(record);
-        Map result = worker.analyzeOutputValue(record);
-        result.forEach((k, v) -> System.out.println(k+" , "+ v));
+        Record record = Worker.getLatestRecord(PropertyLoader.getBeaconURL());
+        Worker.validateOutputValue(record);
+        BeaconAnalyzer analyzer = new BeaconAnalyzer();
+        Map result = analyzer.analyzeOutputValue(record);
+        System.out.println(analyzer.getPrintableResult(result));
+
     }
 
 }
